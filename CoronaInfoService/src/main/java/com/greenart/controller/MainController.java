@@ -1,7 +1,7 @@
 package com.greenart.controller;
 
 import com.greenart.service.CoronaInfoService;
-import com.greenart.vo.CoronaInfoVO;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,16 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
     @Autowired
     CoronaInfoService service;
-
     @GetMapping("/")
     public String getMain(Model model){
- 
-        System.out.println("get Main!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-        // CoronaInfoVO vo =service.selectTodayCoronaInfo();
+        // CoronaInfoVO vo = service.selectTodayCoronaInfo();
         // model.addAttribute("coronaInfo", vo);
-
-
         return "/index";
     }
 }
