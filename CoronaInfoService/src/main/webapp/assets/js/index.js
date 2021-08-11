@@ -85,7 +85,7 @@ $(function () {
                 data: {
                     labels: sidoName,
                     datasets: [{
-                        label: "2021-08-09 신규확진",
+                        label: getToday() + " 신규 확진 ",
                         data: defCnt,
                         backgroundColor: ["#D3D1FF","#C7EDD5","#E9C9C9"]
                     }]
@@ -118,4 +118,16 @@ $(function () {
             ]
         }
     })
+
+
+    function getToday(){
+        let date = new Date();
+        let strDate=
+        date.getFullYear()+"-"+leadingZero(date.getMonth()+1)+"-"+leadingZero(date.getDate());
+        return strDate;
+
+    }
+    function leadingZero(n){
+        return n<10?"0"+n:""+n;
+    }
 })
