@@ -16,7 +16,10 @@
     <select id = "selectCoronaSidoByDate" resultType = "com.greenart.vo.CoronaSidoVO">
         select * from corona_sido where date_format(createDt,"%Y-%m-%d") = str_to_date(#{date}, "%Y-%m-%d") and gubun != '합계'
     </select>
-    
-    
-    
+
+    <insert id ="insertCoronaAge">
+        INSERT INTO corona_age
+        (confCase, confCaseRate, createDt, criticalRate, death, deathRate, gubun)
+        VALUES(#{confCase}, #{confCaseRate}, #{createDt}, #{criticalRate}, #{death}, #{deathRate}, #{gubun});
+    </insert>
 </mapper>
