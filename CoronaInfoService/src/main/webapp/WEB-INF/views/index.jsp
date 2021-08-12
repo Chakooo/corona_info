@@ -60,6 +60,27 @@ pageEncoding="UTF-8"%>
                         <span class="region">경남 고성군</span>
                         <span class="num">2</span>명 추가확진
                     </div>
+                    <div class="live_confirm_item">
+                        <span class = "time">16분 전</span>
+                        <span class="region">경남 고성군</span>
+                        <span class="num">2</span>명 추가확진
+                    </div>  <div class="live_confirm_item">
+                        <span class = "time">16분 전</span>
+                        <span class="region">경남 고성군</span>
+                        <span class="num">2</span>명 추가확진
+                    </div>  <div class="live_confirm_item">
+                        <span class = "time">16분 전</span>
+                        <span class="region">경남 고성군</span>
+                        <span class="num">2</span>명 추가확진
+                    </div>  <div class="live_confirm_item">
+                        <span class = "time">16분 전</span>
+                        <span class="region">경남 고성군</span>
+                        <span class="num">2</span>명 추가확진
+                    </div>  <div class="live_confirm_item">
+                        <span class = "time">16분 전</span>
+                        <span class="region">경남 고성군</span>
+                        <span class="num">2</span>명 추가확진
+                    </div>
                 </div>
                 <div class="content_right">
                     <table class="region_confirm_tbl">
