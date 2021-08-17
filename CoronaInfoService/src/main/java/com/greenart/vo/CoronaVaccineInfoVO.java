@@ -18,4 +18,5 @@ public class CoronaVaccineInfoVO {
     
     private String region;
     
+    private String date;
 }

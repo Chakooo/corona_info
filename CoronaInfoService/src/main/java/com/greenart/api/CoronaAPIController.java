@@ -163,7 +163,7 @@ public class CoronaAPIController {
         if(node == null) return null;
         return node.getNodeValue();
     }
-    @GetMapping("/api/Corona/age")
+    @GetMapping("/api/corona/age")
     public Map<String,Object> getCoronaAge(@RequestParam String startDt, @RequestParam String endDt)throws Exception{
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
         StringBuilder urlBuilder = new StringBuilder("http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19GenAgeCaseInfJson"); /*URL*/

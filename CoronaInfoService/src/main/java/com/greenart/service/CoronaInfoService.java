@@ -26,26 +26,27 @@ public class CoronaInfoService {
     }
 
     public CoronaInfoVO selectTodayCoronaInfo() {
-        Calendar start = Calendar.getInstance();
+        Calendar now = Calendar.getInstance();
+        Calendar standard = Calendar.getInstance();
         // Calendar end = Calendar.getInstance();
-        start.set(Calendar.HOUR_OF_DAY, 10);
-        start.set(Calendar.MINUTE, 30);
-        start.set(Calendar.SECOND,0);
+        standard.set(Calendar.HOUR_OF_DAY, 10);
+        standard.set(Calendar.MINUTE, 30);
+        standard.set(Calendar.SECOND,0);
 
         // 2021-08-11 01:00:00 - 접속시간
         // 2021-08-11 10:30:00 - 세팅값
         // 현재시간이 세팅값보다 이전이라면, 전 날의 데이터를 뽑아주고
         // 현재시간이 세팅값보다 나중이라면, 오늘 데이터를 뽑아준다.
-        Calendar now = Calendar.getInstance();
+        
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        if (now.getTimeInMillis() < start.getTimeInMillis()) {
+        if (now.getTimeInMillis() < standard.getTimeInMillis()) {
             // 현재 접속시간이 기준시간 (10시 30분 10초) 보다 이전일 때
             // 하루 이전 날짜로 변경
             now.add(Calendar.DATE, -1);
         }
-        String date = formatter.format(now.getTime());
+        String dt = formatter.format(now.getTime());
         
-        CoronaInfoVO data = mapper.selectCoronaInfoByDate(date);
+        CoronaInfoVO data = mapper.selectCoronaInfoByDate(dt);
         Integer accExamCnt = data.getAccExamCnt();
         Integer decideCnt = data.getDecideCnt();
 
@@ -163,4 +164,6 @@ public class CoronaInfoService {
     public List<CoronaVaccineInfoVO> selectCoronaVaccineInfo(String date) {
         return mapper.selectCoronaVaccineInfo(date);
     }
+
+    
 }

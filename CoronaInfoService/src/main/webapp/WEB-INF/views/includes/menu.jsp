@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
         <a href="/" id = "logo">CORONA INFO</a>
         <ul class = "main_menu">
             <li>
-                <a href="#">Overview <span>전체 통계</span></a>
+                <a href="/">Overview <span>전체 통계</span></a>
             </li>
             <li>
                 <a href="/regional">Regional <span>지역별 통계</span></a>
