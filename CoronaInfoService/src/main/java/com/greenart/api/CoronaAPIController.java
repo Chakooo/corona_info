@@ -16,10 +16,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.greenart.service.CoronaInfoService;
+import com.greenart.service.WorldInfoService;
 import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,6 +40,8 @@ import org.w3c.dom.NodeList;
 public class CoronaAPIController {
     @Autowired
     CoronaInfoService service;
+    @Autowired
+    WorldInfoService w_service;
     
 
     @GetMapping("/api/corona")
@@ -157,13 +161,7 @@ public class CoronaAPIController {
         }
         return resultMap;
     }
-    public static String getTagValue(String tag, Element elem){
-        NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
-        if(nlList == null) return null;
-        Node node = (Node) nlList.item(0);
-        if(node == null) return null;
-        return node.getNodeValue();
-    }
+   
     @GetMapping("/api/corona/age")
     public Map<String,Object> getCoronaAge(@RequestParam String startDt, @RequestParam String endDt)throws Exception{
         Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
@@ -338,7 +336,14 @@ public class CoronaAPIController {
         }
         List<CoronaVaccineInfoVO> list = service.selectCoronaVaccineInfo(date);
             resultMap.put("data",list);
-            return resultMap;
-        
+            return resultMap;        
+    }
+
+    public static String getTagValue(String tag, Element elem){
+        NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
+        if(nlList == null) return null;
+        Node node = (Node) nlList.item(0);
+        if(node == null) return null;
+        return node.getNodeValue();
     }
 }

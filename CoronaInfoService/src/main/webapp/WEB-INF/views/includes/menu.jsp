@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
 </head>
 <body>
     <div class="left_menu">
-        <a href="/" id = "logo">CORONA INFO</a>
+        <a href="/" id = "logo"><span>CORONA</span> INFO</a>
         <ul class = "main_menu">
             <li>
                 <a href="/">Overview <span>전체 통계</span></a>
@@ -24,11 +24,9 @@ pageEncoding="UTF-8"%>
                 <a href="/vaccine">Vaccine <span>백신접종현황</span></a>
             </li>
             <li>
-                <a href="#">Social Distance <span>사회적거리두기</span></a>
+                <a href="/world">World Info <span>세계 코로나</span></a>
             </li>
-            <li>
-                <a href="#">Prediction Info <span>코로나예측정보</span></a>
-            </li>
+            
         </ul>
     </div>
 </body>
