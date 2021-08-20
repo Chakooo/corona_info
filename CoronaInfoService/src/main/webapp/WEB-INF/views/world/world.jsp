@@ -20,34 +20,36 @@ pageEncoding="UTF-8"%>
     <%@include file="/WEB-INF/views/includes/menu.jsp"%>
     <div class="right_area">
         <div class="data_row">
-            <h1><input id ="date">전체 백신 접종 현황</h1>
-            <div class="vaccine_first">
-                <p>1차 접종</p>
-                <p><span id="accFirstCntAll">-</span> <span id="incFirstCntAll">-</span> </p>
+            <h1>세계 코로나 확진자수</h1>
+            <div class="def_sum">
+                <p>확진자</p>
+                <p><span id="natDefCnt">-</span> <span id="defIncrease">-</span> </p>
             </div>
-            <div class="vaccine_second">
-                <p>2차 접종</p>
-                <p><span id="accSecondCntAll">-</span> <span id="incSecondCntAll">-</span> </p>
+            <div class="death_sum">
+                <p>사망자</p>
+                <p><span id="natDeathCnt">-</span> <span id="deathIncrease">-</span> </p>
             </div>
         </div>
         <div class="data_row">
             <h1>오늘의 확진자수</h1>
-            <div class="vaccine_first">
-                <p>1차 접종</p>
-                <p><span id="accFirstCntAll">-</span> <span id="incFirstCntAll">-</span> </p>
+            <div class="def_today">              
+                <p><span id="todayDef">-</span></p>
             </div>
-            <div class="vaccine_second">
-                <p>2차 접종</p>
-                <p><span id="accSecondCntAll">-</span> <span id="incSecondCntAll">-</span> </p>
+            <div class="versus">                
+                <p><span id="versus_yesterday">-</span></p>
+                <p><span id="versus_weeksAgo">-</span> </p>
+            </div>
+        </div>      
+
+        <div class="data_row">
+            <h1>차트로 보는 세계코로나 상황</h1>
+            <div class="chart_area">              
+           
             </div>
         </div>
-        <div>
-            
-        </div>
-        <div class="sido_area">
-         
-        </div>
+
     </div>
+
 </div>
 
     

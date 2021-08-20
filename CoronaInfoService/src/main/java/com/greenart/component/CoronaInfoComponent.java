@@ -16,10 +16,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import com.greenart.service.CoronaInfoService;
+import com.greenart.service.WorldInfoService;
 import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
+import com.greenart.vo.CoronaWorldInfoVO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -34,6 +36,8 @@ public class CoronaInfoComponent {
     // 매일 10시 30분에 한 번 호출
     @Autowired
     CoronaInfoService service;
+    @Autowired
+    WorldInfoService w_service;
 
     @Scheduled(cron = "0 30 10 * * *")
     public void getCoronaInfo() throws Exception {
@@ -310,4 +314,73 @@ public class CoronaInfoComponent {
             service.insertCoronaVaccineInfo(vo);
         }
     }
+
+    @Scheduled(cron = "00 00 13 * * *")
+    public void getCoronaWorldInformation()throws Exception{
+        // 날짠 send 형식 : 20201023 
+
+        Date dt = new Date();
+        SimpleDateFormat dtFormatter = new SimpleDateFormat("yyyyMMdd");
+        String today = dtFormatter.format(dt);
+        System.out.println(dt);
+
+        StringBuilder urlBuilder = new StringBuilder("http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19NatInfStateJson"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=%2FWTxzUx7RRv4Y4NgmmONDy5QfMajED80WjbrFMT%2BcPb29GeWTTfxq8dR%2FVneVoJTF8vUpbtDEaS4y1d9DURapQ%3D%3D"); /*Service Key*/
+        urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("100000", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("startCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8")); /*검색할 생성일 범위의 시작*/
+        urlBuilder.append("&" + URLEncoder.encode("endCreateDt","UTF-8") + "=" + URLEncoder.encode(today, "UTF-8")); /*검색할 생성일 범위의 종료*/
+
+        DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+        Document doc = docBuilder.parse(urlBuilder.toString());
+
+        doc.getDocumentElement().normalize();
+        // System.out.println(doc.getDocumentElement().getNodeName());
+        NodeList nList = doc.getElementsByTagName("item");
+        System.out.println(nList.getLength());
+        
+        for(int i=0 ; i< nList.getLength();i++){
+            // Node n = nList.item(i);
+            // Element elem = (Element)n;
+            Element elem = (Element)nList.item(i);
+
+            String natDeathRate =  getTagValue("natDeathRate", elem);
+
+            if(natDeathRate.equals("NaN")){
+                natDeathRate = "0.0";                                
+            }
+            System.out.println();
+
+
+           String areaNm = getTagValue("areaNm", elem);
+           String createDt = getTagValue("createDt", elem);
+           Integer natDeathCnt =Integer.parseInt(getTagValue("natDeathCnt", elem)) ;
+           Double DR = Double.parseDouble(natDeathRate) ;
+           Integer natDefCnt = Integer.parseInt(getTagValue("natDefCnt", elem)) ;
+           String nationNm = getTagValue("nationNm", elem);
+           String nationNmEn = getTagValue("nationNmEn", elem);
+
+           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+           Date create_dt= formatter.parse(createDt);
+
+            CoronaWorldInfoVO vo = new CoronaWorldInfoVO();
+            vo.setAreaNm(areaNm);
+            vo.setCreateDt(create_dt);
+            vo.setNatDeathCnt(natDeathCnt);
+            vo.setNatDeathRate(DR);
+            vo.setNatDefCnt(natDefCnt);
+            vo.setNationNm(nationNm);
+            vo.setNationNmEn(nationNmEn);
+            w_service.insertCoronaWorldInfo(vo);
+           System.out.println(create_dt);
+        }        
+  
+        System.out.println("월드인포 인서트");
+    }
+   
+
+
+
+
 }

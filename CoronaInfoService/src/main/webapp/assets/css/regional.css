@@ -13,6 +13,11 @@
     font-weight: 700;font-size: 20px;width: 110px;
     padding: 12px; border: 0; box-shadow: 0 0 10px rgba(0,0,0,0.2);
     outline: none;
+    cursor: pointer;
+    text-decoration: underline;
+}
+.content_head #date:hover{
+    color: #f22;
 }
 
 .content_area > div {display: inline-block; vertical-align: top; text-align: center; 

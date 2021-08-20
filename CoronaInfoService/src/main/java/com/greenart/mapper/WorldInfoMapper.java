@@ -1,5 +1,8 @@
 package com.greenart.mapper;
 
+
+import java.util.List;
+
 import com.greenart.vo.CoronaWorldInfoVO;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -8,5 +11,10 @@ import org.apache.ibatis.annotations.Mapper;
 public interface WorldInfoMapper {
     public void insertCoronaWorldInfo(CoronaWorldInfoVO vo);
 
-    public Integer selectWorldCoronaSum(String date);
+    public CoronaWorldInfoVO selectWorldCoronaSum(String date);
+    public CoronaWorldInfoVO selectWorldCoronaSumYesterDay(String date);
+    public Integer selectDiffYesterday(String date);
+    public Integer selectDiffWeeks(String date);
+    public List<CoronaWorldInfoVO> selectChartInfo(String date, String term);
+
 }

@@ -19,16 +19,33 @@
 /* div반으로 쪼갬 */
 .data_row > div > p {margin-bottom: 15px;}
 
-.data_row #accFirstCntAll{
-    font-size: 32px;
+.data_row #natDefCnt{
+    font-size: 32px;color: #f22;
 }
-.data_row #incFirstCntAll{font-size: 16px; display: block; margin-top: 10px; color: #f22;}
+.data_row #defIncrease{font-size: 16px; display: block; 
+    color: #f22; border-radius: 20px;  background-color: rgb(248, 207, 207);
+    text-align: center;width: 100px;
+    margin: auto;margin-top: 20px; padding: 5px;
+    
+}
 
-.data_row #accSecondCntAll{
+
+.data_row #natDeathCnt{
     font-size: 32px;
 }
-.data_row #incSecondCntAll{font-size: 16px; display: block; margin-top: 10px; color: #f22;}
+.data_row #deathIncrease{font-size: 16px; display: block;
+    color: rgb(0, 0, 0); border-radius: 20px;  background-color: rgb(197, 196, 196);    
+    text-align: center;width: 100px;
+    margin: auto;margin-top: 20px; padding: 5px;
+}
 .container > .right_area{font-size: 0;}
+
+.data_row #todayDef{
+    font-size: 45px;
+}
+
+
+
 .sido_box{
     background-color: #fff; margin-right: 20px;
     width: calc((100% - 40px) / 3); display: inline-block; vertical-align: top;

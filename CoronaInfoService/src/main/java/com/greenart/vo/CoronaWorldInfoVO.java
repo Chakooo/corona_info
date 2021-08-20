@@ -14,4 +14,16 @@ private Double natDeathRate;
 private Integer natDefCnt;
 private String nationNm;
 private String nationNmEn;
+
+
+private String worldDeathSum;
+private String worldDefSum;
+private String worldDefGap;
+private String worldDeathGap;
+
+
+private String yesterdayDiff;
+private String chartDate;
+private String weeksDiff;
+
 }
