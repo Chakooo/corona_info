@@ -26,4 +26,8 @@ private String yesterdayDiff;
 private String chartDate;
 private String weeksDiff;
 
+
+private Integer yesterDayDefDiff;
+private Integer yesterDayDeathDiff;
+
 }

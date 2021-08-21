@@ -1,5 +1,6 @@
 $(function () {
     // Age Today
+    $("#overview").addClass("current");
     $.ajax({
         type: "get",
         url: "/api/corona/age/today",
@@ -107,8 +108,8 @@ $(function () {
                 let tag =
                     '<tr>' +
                     '<td>' + r.data[i].gubun + '</td>' +
-                    '<td>' + r.data[i].defCnt + '</td>' +
-                    '<td>' + r.data[i].incDec + ' ▲</td>' +
+                    '<td>' + comma(r.data[i].defCnt) + '</td>' +
+                    '<td>' + comma(r.data[i].incDec) + ' ▲</td>' +
                     '</tr>'
                 $(".region-tbody").eq(page).append(tag);
             }
@@ -200,5 +201,9 @@ $(function () {
     // 날짜가져올때 0 추가표시
     function leadingZero(n) {
         return n < 10 ? "0" + n : "" + n;
+    }
+    // 콤마 정규표현식
+    function comma(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 })

@@ -15,16 +15,16 @@ pageEncoding="UTF-8"%>
         <a href="/" id = "logo"><span>CORONA</span> INFO</a>
         <ul class = "main_menu">
             <li>
-                <a href="/">Overview <span>전체 통계</span></a>
+                <a href="/" id="overview">Overview <span>전체 통계</span></a>
             </li>
             <li>
-                <a href="/regional">Regional <span>지역별 통계</span></a>
+                <a href="/regional" id=regional>Regional <span>지역별 통계</span></a>
             </li>
             <li>
-                <a href="/vaccine">Vaccine <span>백신접종현황</span></a>
+                <a href="/vaccine" id=vaccine>Vaccine <span>백신접종현황</span></a>
             </li>
             <li>
-                <a href="/world">World Info <span>세계 코로나</span></a>
+                <a href="/world" id=worldInfo>World Info <span>세계 코로나</span></a>
             </li>
             
         </ul>

@@ -14,6 +14,7 @@ $.datepicker.setDefaults({
 
 
 $(function () {
+    $("#regional").addClass("current");
 
     var coronaWeeksChart = new Chart($("#accDecideChart"), {
         type: "line",

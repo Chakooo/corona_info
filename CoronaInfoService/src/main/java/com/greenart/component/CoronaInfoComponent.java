@@ -92,6 +92,7 @@ public class CoronaInfoComponent {
             vo.setStateTime(createdt);
             service.insertCoronaInfo(vo);
         }
+        System.out.println("corona Info execution");
     }
 
     @Scheduled(cron = "10 30 10 * * *")
@@ -145,6 +146,7 @@ public class CoronaInfoComponent {
             vo.setCreateDt(createDt);
             service.insertCoronaSido(vo);
         }
+        System.out.println("corona sido execution");
     }
 
     public static String getTagValue(String tag, Element elem) {
@@ -241,9 +243,9 @@ public class CoronaInfoComponent {
             // System.out.println(vo);
 
             service.insertCoronaAge(vo);
-            System.out.println("코로나 나이/성별 DB로 입력완료");
-
+            
         }
+        System.out.println("corona age execution");
     }
 
     // 매일 10:00:00 에 실행
@@ -313,6 +315,7 @@ public class CoronaInfoComponent {
 
             service.insertCoronaVaccineInfo(vo);
         }
+        System.out.println("corona vaccine execution");
     }
 
     @Scheduled(cron = "00 00 13 * * *")
@@ -373,10 +376,9 @@ public class CoronaInfoComponent {
             vo.setNationNm(nationNm);
             vo.setNationNmEn(nationNmEn);
             w_service.insertCoronaWorldInfo(vo);
-           System.out.println(create_dt);
         }        
+        System.out.println("corona worldinfo execution");
   
-        System.out.println("월드인포 인서트");
     }
    
 

@@ -4,6 +4,7 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -90,19 +91,21 @@ public class WorldAPIController {
     @GetMapping("/api/corona/world/{date}")
     public Map<String,Object> getCoronaWorldInfo(@PathVariable String date){
         Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
-
-        
-
         CoronaWorldInfoVO vo= w_service.selectWorldCoronaSum(date);
         resultMap.put("data", vo);
         return resultMap;
     }
 
-    @GetMapping("/api/corona/chart/{term}/{date}")
+    @GetMapping("/api/corona/chart/{date}/{term}")
     public Map<String,Object> getCoronaWorldChart(@PathVariable String date ,@PathVariable @Nullable String term){
+        Map<String, Object> resultMap = w_service.selectChartInfo(date, term);  
+        return resultMap;
+    }
+    @GetMapping("/api/corona/national/{date}")
+    public Map<String,Object> getCoronaNationalInfo(@PathVariable String date){
         Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
-        
-        w_service.selectChartInfo(date, term);        
+        List<CoronaWorldInfoVO> vo= w_service.selectNationalTodayInfo(date);
+        resultMap.put("data", vo);
         return resultMap;
     }
 

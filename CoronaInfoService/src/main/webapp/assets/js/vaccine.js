@@ -15,6 +15,8 @@ $.datepicker.setDefaults({
 
 $(function () {
 
+    $("#vaccine").addClass("current");
+
     $("#date").datepicker(); // js 라이브러리 사용
     $("#date").datepicker("setDate", new Date());
     $("#date").datepicker("option", "maxDate" , new Date());

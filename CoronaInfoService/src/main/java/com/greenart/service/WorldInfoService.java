@@ -85,6 +85,8 @@ public class WorldInfoService {
         Map<String,Object> resultMap = new LinkedHashMap<String,Object>();
         List<CoronaWorldInfoVO> list = mapper.selectChartInfo(date, term);
 
+        System.out.println(term);
+
         List<String> chartDate = new ArrayList<>();
         List<Integer> chartDef = new ArrayList<>();
         List<Integer> chartDeath = new ArrayList<>();
@@ -101,4 +103,51 @@ public class WorldInfoService {
         resultMap.put("chartDeath", chartDeath);
         return resultMap;
     }
+
+    public List<CoronaWorldInfoVO> selectNationalTodayInfo(String date){
+
+        Calendar now = Calendar.getInstance();
+        Calendar standard =Calendar.getInstance();
+
+
+        standard.set(Calendar.HOUR_OF_DAY,12);
+        standard.set(Calendar.MINUTE,0);
+        standard.set(Calendar.SECOND,0);
+
+        if(now.getTimeInMillis() < standard.getTimeInMillis()){
+            now.add(Calendar.DATE,-1);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dt = formatter.format(now.getTime());
+
+        List<CoronaWorldInfoVO> vo = mapper.selectNationalTodayInfo(dt); // 국가별 오늘 확진자수
+        List<CoronaWorldInfoVO> yesterday_vo = mapper.selectNationalYesterdayInfo(dt); // 국가별 어제 확진자수
+
+        
+        for(int i = 0;i<vo.size() ; i++){
+        Integer yesterDayDefDiff = vo.get(i).getNatDefCnt() - yesterday_vo.get(i).getNatDefCnt();
+        Integer yesterDayDeathDiff = vo.get(i).getNatDeathCnt() - yesterday_vo.get(i).getNatDeathCnt();
+
+        vo.get(i).setYesterDayDefDiff(yesterDayDefDiff);
+        vo.get(i).setYesterDayDeathDiff(yesterDayDeathDiff);
+
+        }
+
+        System.out.println(vo);
+        return vo;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

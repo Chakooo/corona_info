@@ -43,28 +43,47 @@
     </select>
 
     <select id="selectChartInfo" resultType="com.greenart.vo.CoronaWorldInfoVO">
-            select date_format(createDt,"%Y-%m-%d")as chartDate, sum(natDefCnt) as atDefCnt ,sum(natDeathCnt) as natDeathCnt
+            select date_format(createDt,"%Y-%m-%d")as chartDate, sum(natDefCnt) as natDefCnt ,sum(natDeathCnt) as natDeathCnt
                 from corona_world 
 
                     <if test="term.equals('month')">
-                    where
-                    date_format(createDt,"%Y-%m-%d")
-                    between
-                    date_sub(date_format(#{date},"%Y-%m-%d"),interval 1 month) and
-                    date_format(#{date}, "%Y-%m-%d")
+                        where
+                        date_format(createDt,"%Y-%m-%d")
+                        between
+                        date_sub(date_format(#{date},"%Y-%m-%d"),interval 1 month) and
+                        date_format(#{date}, "%Y-%m-%d")
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
                     </if>
                     
                     <if test="term.equals('3month')">
-                    where
-                    date_format(createDt,"%Y-%m-%d")
-                    between
-                    date_sub(date_format(#{date},"%Y-%m-%d"),interval 1 month) and
-                    date_format(#{date}, "%Y-%m-%d")
+                        where
+                        date_format(createDt,"%Y-%m-%d")
+                        between
+                        date_sub(date_format(#{date},"%Y-%m-%d"),interval 3 month) and
+                        date_format(#{date}, "%Y-%m-%d")
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
                     </if>
-
-            group by date_format(createDt,"%Y-%m-%d");
-
+                    <if test="term.equals('all')">
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
+                    </if>
     </select>
+    
+    <select id="selectNationalTodayInfo" resultType="com.greenart.vo.CoronaWorldInfoVO">
+        select createDt,areaNm,nationNm,natDefCnt,natDeathCnt
+        from corona_world 
+        where date_format(createDt,"%Y-%m-%d")=  str_to_date(#{date}, "%Y-%m-%d")
+        and (areaNm != '기타' and areaNm != '오세아니아')
+        group by nationNm
+    </select>
+
+    <select id="selectNationalYesterdayInfo" resultType="com.greenart.vo.CoronaWorldInfoVO">
+        select createDt,areaNm,nationNm,natDefCnt,natDeathCnt
+        from corona_world 
+        where date_sub(date_format(createDt,"%Y-%m-%d"), interval -1 day) =  str_to_date(#{date}, "%Y-%m-%d")
+        and (areaNm != '기타' and areaNm != '오세아니아')
+        group by nationNm 
+    </select>
+
 
     
 </mapper>

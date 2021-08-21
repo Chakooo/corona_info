@@ -26,6 +26,13 @@
     background-color: #333;
 }
 
+/* 해당 메뉴선택시 유지위한 */
+.main_menu a.current::before{
+    background-color: #333;
+}
+
+
+
 .dashboard_content{
     box-sizing: border-box; padding:10px; font-size: 0;}
 .dashboard_content > div{
