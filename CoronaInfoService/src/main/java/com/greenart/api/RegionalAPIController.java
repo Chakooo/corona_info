@@ -48,10 +48,6 @@ public class RegionalAPIController {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             date = formatter.format(now.getTime());        
         }
-
-      
-        
-        
         CoronaSidoInfoVO vo = service.selectRegionalCoronaInfo(region, date);
         resultMap.put("data", vo);      
                 

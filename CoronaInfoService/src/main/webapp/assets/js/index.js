@@ -1,6 +1,6 @@
 $(function () {
     // Age Today
-    $("#overview").addClass("current");
+    $("#overview").addClass("currently");
     $.ajax({
         type: "get",
         url: "/api/corona/age/today",

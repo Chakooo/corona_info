@@ -1,5 +1,7 @@
 package com.greenart.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import com.greenart.mapper.RegionalInfoMapper;
@@ -35,6 +37,21 @@ public class RegionalInfoService {
         return mapper.selectRegionalVaccineTwoWeeks(region, date);
     }
     public List<VaccineWeeksVO> selectVaccineInfo (String date){
-        return mapper.selectVaccineInfo(date);
+
+        Calendar now = Calendar.getInstance();
+        Calendar standard =Calendar.getInstance();
+
+
+        standard.set(Calendar.HOUR_OF_DAY,11);
+        standard.set(Calendar.MINUTE,0);
+        standard.set(Calendar.SECOND,0);
+
+        if(now.getTimeInMillis() < standard.getTimeInMillis()){
+            now.add(Calendar.DATE,-1);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dt = formatter.format(now.getTime());
+        return mapper.selectVaccineInfo(dt);
     }
 }

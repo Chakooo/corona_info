@@ -1,7 +1,7 @@
 // world.js
 $(function () {
 
-    $("#worldInfo").addClass("current");
+    $("#worldInfo").addClass("currently");
 
     let ctx = $("#world_chart")
 
@@ -173,17 +173,17 @@ $(function () {
                     }
                     let tag = 
                         '<div class="nat_box">'+
-                        '<p class="sido_name">['+r.data[i].areaNm+']<img src="/assets/images/TZ-flag-32.png">'+r.data[i].nationNm+'</p>' +
+                        '<p class="sido_name"><img src="/assets/images/'+i+'.gif">'+r.data[i].nationNm+'</p>' +
                         '</div>' +
                         '<div class="nat_box">' +
-                        '<p class="sidoFirst">' +
-                        '<span class="sidoAccCnt" style="margin-left:5px;">'+comma(r.data[i].natDefCnt)+'</span><br>' +
+                        '<p class="nat_first">' +
+                        '<p class="sidoAccCnt" style="margin-left:5px;">'+comma(r.data[i].natDefCnt)+'</p>' +
                         '<span class="sidoIncCnt" style="margin-left:5px">'+comma(r.data[i].yesterDayDefDiff)+'</span>' +
                         '</p>' +
                         '</div>' +
                         '<div class="nat_box">' +
-                        '<p class="sidoFirst"> ' +
-                        '<span class="sidoAccCnt" style="margin-left:5px">'+comma(r.data[i].natDeathCnt)+'</span><br>' +
+                        '<p class="nat_first"> ' +
+                        '<p class="sidoAccCnt" style="margin-left:5px">'+comma(r.data[i].natDeathCnt)+'</p>' +
                         '<span class="sidoIncCnt" style="margin-left:5px">'+comma(r.data[i].yesterDayDeathDiff)+'</span>' +
                         '</p>' +
                         '</div>';                        
@@ -203,6 +203,7 @@ $(function () {
         let date = new Date();
         let strDate =
             date.getFullYear() + "-" + leadingZero(date.getMonth() + 1) + "-" + leadingZero(date.getDate());
+            console.log(strDate)
         return strDate;
     }
     // 날짜가져올때 0 추가표시

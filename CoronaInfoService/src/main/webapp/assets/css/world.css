@@ -68,15 +68,16 @@ border-radius: 20px;
 }
 .nat_box:nth-child(3n){margin-right: 0;}
 .nat_box p {font-family: "Noto Sans KR" , sans-serif; margin-top: 23px;}
-.sido_name {font-size: 20px;  font-weight: 700; margin-bottom: 20px;}
-.sidoFirst{margin-bottom: 15px;}
-.sidoFirst > span{font-weight: 700; }
-.sidoFirst > {font-weight: 700; }
+.sido_name {font-size: 16px;  font-weight: 600; margin-bottom: 20px;}
+.sido_name > img{vertical-align: middle; width: 30px; margin:10px}
+.nat_first{margin-bottom: 15px;}
+.nat_first > span{font-weight: 700; }
+.nat_first > {font-weight: 700; }
 
 .sidoSecond > span{font-weight: 700;} 
-.sidoIncCnt {font-size: 15px; color: #f22;}
+.sidoIncCnt {font-size: 15px; color: #f22; font-weight: 700; background-color:  rgb(248, 207, 207); border-radius: 20px; display: inline-block; width: 80px; }
 .sidoAccCnt , .nat_name_gubun{font-size: 20px; font-weight: 700;  margin-bottom: 5px;}
-.nat_name_gubun , .sidoAccCnt_gubun{color: rgb(255, 154, 154); font-size: 23px; font-weight: 700;}
+.nat_name_gubun , .nat_gubun{color: rgb(73, 126, 170); font-size: 27px; font-weight: 700;}
 
 
 #date{

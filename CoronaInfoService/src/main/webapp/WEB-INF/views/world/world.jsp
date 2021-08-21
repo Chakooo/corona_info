@@ -74,13 +74,13 @@ pageEncoding="UTF-8"%>
                 <p class="nat_name_gubun">나라</p>
             </div>
             <div class="nat_box">
-                <p class="sidoFirst">
-                    <span class="sidoAccCnt_gubun" style="margin-left:5px">확진자</span>
+                <p class="nat_first">
+                    <span class="nat_gubun" style="margin-left:5px">확진자</span>
                 </p>
             </div>
             <div class="nat_box">
-                <p class="sidoFirst">
-                    <span class="sidoAccCnt_gubun" style="margin-left:5px">사망자</span>
+                <p class="nat_first">
+                    <span class="nat_gubun" style="margin-left:5px">사망자</span>
                 </p>
             </div>
         </div>

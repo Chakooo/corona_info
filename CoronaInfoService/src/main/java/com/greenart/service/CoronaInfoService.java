@@ -162,6 +162,7 @@ public class CoronaInfoService {
     }
 
     public List<CoronaVaccineInfoVO> selectCoronaVaccineInfo(String date) {
+        
         return mapper.selectCoronaVaccineInfo(date);
     }
 

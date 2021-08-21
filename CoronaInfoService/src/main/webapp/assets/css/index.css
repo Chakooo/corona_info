@@ -27,7 +27,7 @@
 }
 
 /* 해당 메뉴선택시 유지위한 */
-.main_menu a.current::before{
+.main_menu a.currently::before{
     background-color: #333;
 }
 
