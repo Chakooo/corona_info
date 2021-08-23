@@ -509,5 +509,5 @@ public class CoronaAPIController {
         Node node = (Node) nlList.item(0);
         if(node == null) return null;
         return node.getNodeValue();
-    }
+    } 
 }

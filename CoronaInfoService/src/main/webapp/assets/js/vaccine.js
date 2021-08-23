@@ -145,7 +145,7 @@ $(function () {
             for (var i = 0; i < positions.length; i++) {
 
                 // 마커 이미지의 이미지 크기 입니다
-                var imageSize = new kakao.maps.Size(40, 40);
+                var imageSize = new kakao.maps.Size(45, 45);
 
                 // 마커 이미지를 생성합니다    
                 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
