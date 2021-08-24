@@ -343,10 +343,8 @@ public class CoronaAPIController {
             return resultMap;        
     }
 
-<<<<<<< HEAD
-    
 
-=======
+    
 
     @GetMapping("/api/corona/vaccineMedicalCenter")
     public Map<String,Object> getCoronaVaccine() throws Exception{
@@ -492,8 +490,6 @@ public class CoronaAPIController {
 
 
 
-
->>>>>>> corona_worker
     public static String getTagValue(String tag, Element elem){
         NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
         if(nlList == null) return null;

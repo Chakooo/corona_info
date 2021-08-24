@@ -15,17 +15,6 @@ $.datepicker.setDefaults({
 
 $(function () {
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
 
 
 
@@ -206,7 +195,6 @@ $(function () {
 
 
 
->>>>>>> corona_worker
     $("#vaccine").addClass("currently");
 
     $("#date").datepicker(); // js 라이브러리 사용
