@@ -501,8 +501,11 @@ public class CoronaAPIController {
     }
     
 
+<<<<<<< HEAD
  
 
+=======
+>>>>>>> 83f7326f1e9f9230658fcbb6108e3d0758988726
     public static String getTagValue(String tag, Element elem){
         NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
         if(nlList == null) return null;
