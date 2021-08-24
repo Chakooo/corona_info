@@ -87,47 +87,82 @@ $(function () {
     $.ajax({
         type: 'get',
         url: '/api/corona/medicalInfo',
-        async: false,
         success: function (r) {
             console.log(r)
-           
+
             var positions = [];
 
-            for(let i=0 ;i<r.medical_data.length;i++){
-            // getMarker(r.medical_data[i].orgZipaddr,r.medical_data[i].orgTlno)
-            let data= {
-                title: r.medical_data[i].orgnm+" / "+r.medical_data[i].orgTlno, 
-                latlng: new kakao.maps.LatLng(r.medical_data[i].location_b,r.medical_data[i].location_a)
+            for (let i = 0; i < r.medical_data.length; i++) {
+                // getMarker(r.medical_data[i].orgZipaddr,r.medical_data[i].orgTlno)
+                let data = {
+                    title: r.medical_data[i].orgnm + " / " + r.medical_data[i].orgTlno,
+                    latlng: new kakao.maps.LatLng(r.medical_data[i].location_b, r.medical_data[i].location_a)
+                }
+                positions.push(data)
             }
-            positions.push(data)     
+
+            console.log(positions)
+            var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+
+            for (var i = 0; i < positions.length; i++) {
+
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new kakao.maps.Size(24, 35);
+
+                // 마커 이미지를 생성합니다    
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng, // 마커를 표시할 위치
+                    title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    image: markerImage // 마커 이미지 
+                });
+            }
         }
-    
-        console.log(positions)
-        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-        
-     for (var i = 0; i < positions.length; i ++) {
-        
-        // 마커 이미지의 이미지 크기 입니다
-        var imageSize = new kakao.maps.Size(24, 35); 
-        
-        // 마커 이미지를 생성합니다    
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-        
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            map: map, // 마커를 표시할 지도
-            position: positions[i].latlng, // 마커를 표시할 위치
-            title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-            image : markerImage // 마커 이미지 
-        });
-        
-    }
-    
-
-
-    }
-
     })
+
+        $.ajax({
+        type: 'get',
+        url: '/api/corona/vaccineCenterInfo',
+        success: function (r) {
+            console.log(r)
+
+            var positions = [];
+
+            for (let i = 0; i < r.vaccineCenter_info.length; i++) {
+                let data = {
+                    title: r.vaccineCenter_info[i].facilityName + " / " + r.vaccineCenter_info[i].phoneNumber,
+                    latlng: new kakao.maps.LatLng(r.vaccineCenter_info[i].location_a, r.vaccineCenter_info[i].location_b)
+                }
+                positions.push(data)
+            }
+
+            console.log(positions)
+            var imageSrc = '/assets/images/783204.png'
+
+            for (var i = 0; i < positions.length; i++) {
+
+                // 마커 이미지의 이미지 크기 입니다
+                var imageSize = new kakao.maps.Size(40, 40);
+
+                // 마커 이미지를 생성합니다    
+                var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                // 마커를 생성합니다
+                var marker = new kakao.maps.Marker({
+                    map: map, // 마커를 표시할 지도
+                    position: positions[i].latlng, // 마커를 표시할 위치
+                    title: positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                    image: markerImage // 마커 이미지 
+                });
+            }
+        }
+    })
+    
+
+
 
 
 

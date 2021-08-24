@@ -21,6 +21,7 @@ import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
+import com.greenart.vo.VaccineAppointedCenterVO;
 import com.greenart.vo.VaccineMedicalCentarVO;
 
 import org.json.JSONArray;
@@ -459,7 +460,6 @@ public class CoronaAPIController {
         // JSONParser jsonParser = new JSONParser();        
         //pom.xml 을 수정한후에는 project에 적용시켜주기위해 프로젝트를 다시 돌린다.
 
-        Integer cnt = jsonObject.getInt("currentCount");
 
         JSONArray dataArray = jsonObject.getJSONArray("data");
 
@@ -479,11 +479,26 @@ public class CoronaAPIController {
             System.out.println(lng);
             System.out.println(phoneNumber);
 
-
+            VaccineAppointedCenterVO vo = new VaccineAppointedCenterVO();
+            
+            vo.setAddress(address);
+            vo.setFacilityName(facilityName);
+            vo.setLocation_a(lat);
+            vo.setLocation_b(lng);
+            vo.setPhoneNumber(phoneNumber);            
+            service.insertVaccineCenterInfo(vo);
         }
-
         return resultMap;
     }   
+
+    @GetMapping("/api/corona/vaccineCenterInfo")
+    public Map<String,Object> vaccineCenterInfo(){
+        Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
+     
+        List<VaccineAppointedCenterVO> list = service.selectVaccineCenterInfo();
+        resultMap.put("vaccineCenter_info",list);
+        return resultMap;        
+    }
     
 
 

@@ -78,4 +78,14 @@
 	        SET location_a=#{location_a}, location_b=#{location_b}
 	        WHERE orgnm=#{orgnm}
     </update>
+
+    <insert id="insertVaccineCenterInfo">
+        INSERT INTO corona_info.vaccine_centerinfo
+        (address, facilityName, location_a, location_b, phoneNumber)
+        VALUES(#{address}, #{facilityName}, #{location_a}, #{location_b}, #{phoneNumber});
+    </insert>
+
+     <select id="selectVaccineCenterInfo" resultType="com.greenart.vo.VaccineAppointedCenterVO">
+        select * from vaccine_centerinfo  ;
+    </select>
 </mapper>

@@ -6,6 +6,7 @@ import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
+import com.greenart.vo.VaccineAppointedCenterVO;
 import com.greenart.vo.VaccineMedicalCentarVO;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -31,5 +32,6 @@ public interface CoronaInfoMapper {
 
     public void updateLocation(VaccineMedicalCentarVO vo);
 
- 
+    public void insertVaccineCenterInfo(VaccineAppointedCenterVO vo);
+    public List<VaccineAppointedCenterVO> selectVaccineCenterInfo(); 
 }
