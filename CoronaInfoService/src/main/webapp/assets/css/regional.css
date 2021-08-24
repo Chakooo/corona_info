@@ -23,8 +23,7 @@
 
 .content_area > div {display: inline-block; vertical-align: top; text-align: center; 
                     padding:30px; box-sizing:border-box; background-color: #fff;
-                    margin-right: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);
-                    
+                    margin-right: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);                    
                 }
 #region_select{
     cursor: pointer;

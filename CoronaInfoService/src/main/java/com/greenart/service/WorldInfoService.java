@@ -28,27 +28,54 @@ public class WorldInfoService {
         Calendar standard =Calendar.getInstance();
 
 
-        standard.set(Calendar.HOUR_OF_DAY,12);
-        standard.set(Calendar.MINUTE,0);
+        standard.set(Calendar.HOUR_OF_DAY,13);
+        standard.set(Calendar.MINUTE,3);
         standard.set(Calendar.SECOND,0);
 
         if(now.getTimeInMillis() < standard.getTimeInMillis()){
             now.add(Calendar.DATE,-1);
         }
+
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         String dt = formatter.format(now.getTime());
+        System.out.println("날짜확인:"+dt);
 
         CoronaWorldInfoVO vo = mapper.selectWorldCoronaSum(dt); // 세계 코로나 확진자수 합
-        CoronaWorldInfoVO yesterday_vo = mapper.selectWorldCoronaSumYesterDay(dt); // 오늘 확진자수 증가량
-
+       
+        CoronaWorldInfoVO yesterday_vo = mapper.selectWorldCoronaSumYesterDay(dt); // 오늘 확진자수 증가량       
         Integer getYesterday = mapper.selectDiffYesterday(dt); //어제 확진자수 증가량
         Integer getWeeks = mapper.selectDiffWeeks(dt);  // 일주일전 확진자수 증가량
-    
-        System.out.println(getYesterday);
-        System.out.println(getWeeks);
+        System.out.println(vo); 
+        System.out.println("어제"+yesterday_vo); 
 
-       
+
+        
+
+        if(vo.getNatDefCnt()==null){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());            
+            vo = mapper.selectWorldCoronaSum(dt2);
+            
+        }
+        if(yesterday_vo==null){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());       
+            yesterday_vo = mapper.selectWorldCoronaSumYesterDay(dt2); // 오늘 확진자수 증가량       
+            getYesterday = mapper.selectDiffYesterday(dt2); //어제 확진자수 증가량
+           
+        }
+        if(getWeeks ==null){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());    
+
+            getWeeks = mapper.selectDiffWeeks(dt2);
+        }
+
+        System.out.println(vo);
+        System.out.println(yesterday_vo);
+    
+      
 
         Integer defGap = vo.getNatDefCnt() - yesterday_vo.getNatDefCnt();
         Integer deathGap =  vo.getNatDeathCnt()  - yesterday_vo.getNatDeathCnt();
@@ -83,9 +110,30 @@ public class WorldInfoService {
 
     public Map<String,Object> selectChartInfo(String date, String term){
         Map<String,Object> resultMap = new LinkedHashMap<String,Object>();
-        List<CoronaWorldInfoVO> list = mapper.selectChartInfo(date, term);
 
-        System.out.println(term);
+        Calendar now = Calendar.getInstance();
+        Calendar standard =Calendar.getInstance();
+
+
+        standard.set(Calendar.HOUR_OF_DAY,13);
+        standard.set(Calendar.MINUTE,3);
+        standard.set(Calendar.SECOND,0);
+
+        if(now.getTimeInMillis() < standard.getTimeInMillis()){
+            now.add(Calendar.DATE,-1);
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dt = formatter.format(now.getTime());
+
+        List<CoronaWorldInfoVO> list = mapper.selectChartInfo(dt, term);
+
+        if(list == null){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());
+            list = mapper.selectChartInfo(dt2, term);
+        }
+
 
         List<String> chartDate = new ArrayList<>();
         List<Integer> chartDef = new ArrayList<>();
@@ -110,8 +158,8 @@ public class WorldInfoService {
         Calendar standard =Calendar.getInstance();
 
 
-        standard.set(Calendar.HOUR_OF_DAY,12);
-        standard.set(Calendar.MINUTE,0);
+        standard.set(Calendar.HOUR_OF_DAY,13);
+        standard.set(Calendar.MINUTE,3);
         standard.set(Calendar.SECOND,0);
 
         if(now.getTimeInMillis() < standard.getTimeInMillis()){
@@ -124,6 +172,17 @@ public class WorldInfoService {
         List<CoronaWorldInfoVO> vo = mapper.selectNationalTodayInfo(dt); // 국가별 오늘 확진자수
         List<CoronaWorldInfoVO> yesterday_vo = mapper.selectNationalYesterdayInfo(dt); // 국가별 어제 확진자수
 
+        if(vo.size()==0){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());
+            vo = mapper.selectNationalTodayInfo(dt2);            
+        }
+        if(yesterday_vo.size()==0){
+            now.add(Calendar.DATE,-2);
+            String dt2 = formatter.format(now.getTime());
+            yesterday_vo = mapper.selectNationalYesterdayInfo(dt2);
+        }
+
         
         for(int i = 0;i<vo.size() ; i++){
         Integer yesterDayDefDiff = vo.get(i).getNatDefCnt() - yesterday_vo.get(i).getNatDefCnt();
@@ -134,7 +193,6 @@ public class WorldInfoService {
 
         }
 
-        System.out.println(vo);
         return vo;
     }
 

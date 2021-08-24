@@ -49,3 +49,12 @@
     cursor : pointer; text-decoration: underline;
 }
 #date:hover { color: #f00;}
+
+#region_select{
+    cursor: pointer;
+    border-radius: 10px;
+
+    display: inline-block; vertical-align: top; text-align: center; 
+                    padding:10px; box-sizing:border-box; background-color: #fff;
+                    margin-bottom: 20px; box-shadow: 0 0 10px rgba(0,0,0,0.2);  
+}

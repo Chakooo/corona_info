@@ -12,6 +12,7 @@ import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
+import com.greenart.vo.VaccineMedicalCentarVO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -165,6 +166,14 @@ public class CoronaInfoService {
         
         return mapper.selectCoronaVaccineInfo(date);
     }
-
+    public void insertMedicalCenterInfo(VaccineMedicalCentarVO vo){
+        mapper.insertMedicalCenterInfo(vo);
+    }
+    public List<VaccineMedicalCentarVO> selectMedicalCenterInfo(){
+        return mapper.selectMedicalCenterInfo();
+    }
+    public void updateLocation(VaccineMedicalCentarVO vo){
+        mapper.updateLocation(vo);
+    }
     
 }

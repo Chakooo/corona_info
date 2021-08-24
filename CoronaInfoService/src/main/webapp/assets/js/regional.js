@@ -207,10 +207,10 @@ $(function () {
                     $("#covidDanger span").eq(0).css("display", "inline").css("color", "#66ff99");
                     return;
                 }
-                $("#accDecideCnt").html(r.data.defCnt);
-                $("#newDecideCnt").html(r.data.incDec);
-                $("#isolateCnt").html(r.data.isolIngCnt);
-                $("#clearIsolateCnt").html(r.data.isolClearCnt);
+                $("#accDecideCnt").html(comma(r.data.defCnt));
+                $("#newDecideCnt").html(comma(r.data.incDec));
+                $("#isolateCnt").html(comma(r.data.isolIngCnt));
+                $("#clearIsolateCnt").html(comma(r.data.isolClearCnt));
                 $("#covidDanger span").css("display", "none");
                 let danger = r.data.incDec + r.data.diff;
                 console.log(r.data.incDec+","+r.data.diff)
@@ -247,5 +247,10 @@ $(function () {
                 $("#vaccineSecondCnt").html(r.formattedSecondCnt);
             }
         })
+    }
+
+
+    function comma(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     }
 })

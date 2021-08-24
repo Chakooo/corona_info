@@ -152,7 +152,7 @@ $(function () {
 
         $.ajax({
             type: "get",
-            url: "/api/corona/national/2021-08-21",
+            url: "/api/corona/national/"+getToday(),
             success: function (r) {
                 console.log(r)
 

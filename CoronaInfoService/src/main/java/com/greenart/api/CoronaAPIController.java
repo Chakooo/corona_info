@@ -21,14 +21,16 @@ import com.greenart.vo.CoronaAgeInfoVO;
 import com.greenart.vo.CoronaInfoVO;
 import com.greenart.vo.CoronaSidoInfoVO;
 import com.greenart.vo.CoronaVaccineInfoVO;
-
+import com.greenart.vo.VaccineMedicalCentarVO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
@@ -257,6 +259,8 @@ public class CoronaAPIController {
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=3CID6KRU4kjF4jvHanoFBLwycg6Htt86aVfgEOgBmAecshZIcO5EC9UM9FhVGwAX2Zf%2B%2FrxgsJeUfled1zNS0w%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("page","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
         urlBuilder.append("&" + URLEncoder.encode("perPage","UTF-8") + "=" + URLEncoder.encode("100000", "UTF-8")); /*한 페이지 결과 수*/
+
+
         if(targetDt !=null){
          targetDt += " 00:00:00";
         urlBuilder.append("&" + URLEncoder.encode("cond[baseDate::EQ]","UTF-8") + "=" + URLEncoder.encode(targetDt, "UTF-8")); /*검색할 생성일 범위의 시작*/
@@ -339,8 +343,157 @@ public class CoronaAPIController {
             return resultMap;        
     }
 
+<<<<<<< HEAD
     
 
+=======
+
+    @GetMapping("/api/corona/vaccineMedicalCenter")
+    public Map<String,Object> getCoronaVaccine() throws Exception{
+        Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
+        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/apnmOrg/v1/list"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("page","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("perPage","UTF-8") + "=" + URLEncoder.encode("10000", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8") + "=%2FWTxzUx7RRv4Y4NgmmONDy5QfMajED80WjbrFMT%2BcPb29GeWTTfxq8dR%2FVneVoJTF8vUpbtDEaS4y1d9DURapQ%3D%3D"); /*Service Key*/
+
+
+        URL url = new URL(urlBuilder.toString());
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+
+        String line;
+        while((line = rd.readLine()) != null){
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        // System.out.println(sb.toString());
+
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        // JSONParser jsonParser = new JSONParser();        
+        //pom.xml 을 수정한후에는 project에 적용시켜주기위해 프로젝트를 다시 돌린다.
+
+        Integer cnt = jsonObject.getInt("currentCount");
+        System.out.println("Count : "+ cnt);
+
+        JSONArray dataArray = jsonObject.getJSONArray("data");
+
+
+        for(int i=0 ; i<dataArray.length(); i++){
+            JSONObject obj = dataArray.getJSONObject(i);            
+
+            String  orgTlno = obj.getString("orgTlno");
+            String  orgZipaddr = obj.getString("orgZipaddr");
+            String  orgnm = obj.getString("orgnm");
+
+
+            VaccineMedicalCentarVO vo = new VaccineMedicalCentarVO();
+
+
+            vo.setOrgTlno(orgTlno);
+            vo.setOrgZipaddr(orgZipaddr);
+            vo.setOrgnm(orgnm);
+            
+            service.insertMedicalCenterInfo(vo);
+
+        }   
+
+        return resultMap;
+    }   
+    
+
+
+
+    @GetMapping("/api/corona/medicalInfo")
+    public Map<String,Object> getMedicalInfo(){
+        Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
+     
+        List<VaccineMedicalCentarVO> list = service.selectMedicalCenterInfo();
+        resultMap.put("medical_data",list);
+        return resultMap;        
+    }
+    // 카카오 api를 활용해 주소에대한 좌표를 가져와서 update로 디비에 넣음
+    @PatchMapping("/api/corona/medicalLocation")
+    public Map<String,Object> getMedicalLocation(@RequestBody VaccineMedicalCentarVO vo){
+        Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
+        
+        service.updateLocation(vo);
+
+        return resultMap;
+    }
+
+    
+
+    @GetMapping("/api/corona/appointedVaccineCenter")
+    public Map<String,Object> getgover() throws Exception{
+        Map<String,Object> resultMap = new LinkedHashMap<String, Object>();
+        StringBuilder urlBuilder = new StringBuilder("https://api.odcloud.kr/api/15077586/v1/centers"); /*URL*/
+        urlBuilder.append("?" + URLEncoder.encode("page","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지번호*/
+        urlBuilder.append("&" + URLEncoder.encode("perPage","UTF-8") + "=" + URLEncoder.encode("500", "UTF-8")); /*한 페이지 결과 수*/
+        urlBuilder.append("&" + URLEncoder.encode("serviceKey","UTF-8") + "=%2FWTxzUx7RRv4Y4NgmmONDy5QfMajED80WjbrFMT%2BcPb29GeWTTfxq8dR%2FVneVoJTF8vUpbtDEaS4y1d9DURapQ%3D%3D"); /*Service Key*/
+
+
+        URL url = new URL(urlBuilder.toString());
+        HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Content-type", "application/json");
+
+        BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder sb = new StringBuilder();
+
+
+        String line;
+        while((line = rd.readLine()) != null){
+            sb.append(line);
+        }
+        rd.close();
+        conn.disconnect();
+
+        // System.out.println(sb.toString());
+
+        JSONObject jsonObject = new JSONObject(sb.toString());
+        // JSONParser jsonParser = new JSONParser();        
+        //pom.xml 을 수정한후에는 project에 적용시켜주기위해 프로젝트를 다시 돌린다.
+
+        Integer cnt = jsonObject.getInt("currentCount");
+
+        JSONArray dataArray = jsonObject.getJSONArray("data");
+
+
+        for(int i=0 ; i<dataArray.length(); i++){
+            JSONObject obj = dataArray.getJSONObject(i);            
+
+            String address= obj.getString("address");
+            String facilityName= obj.getString("facilityName");
+            String lat= obj.getString("lat");
+            String lng= obj.getString("lng");
+            String phoneNumber= obj.getString("phoneNumber");
+
+            System.out.println(address);
+            System.out.println(facilityName);
+            System.out.println(lat);
+            System.out.println(lng);
+            System.out.println(phoneNumber);
+
+
+        }
+
+        return resultMap;
+    }   
+    
+
+
+
+
+
+
+>>>>>>> corona_worker
     public static String getTagValue(String tag, Element elem){
         NodeList nlList = elem.getElementsByTagName(tag).item(0).getChildNodes();
         if(nlList == null) return null;

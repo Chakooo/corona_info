@@ -62,4 +62,20 @@
         where date_format(regdt, "%Y-%m-%d") = str_to_date(#{date}, "%Y-%m-%d")
         and sido != '전국' and sido !='기타' order by firstCnt desc;
     </select>
+
+    <insert id="insertMedicalCenterInfo">
+        INSERT INTO medical_centerinfo
+        (orgTlno, orgZipaddr, orgnm)
+        VALUES(#{orgTlno}, #{orgZipaddr}, #{orgnm});
+    </insert>
+
+    <select id="selectMedicalCenterInfo" resultType="com.greenart.vo.VaccineMedicalCentarVO">
+        select * from medical_centerinfo  ;
+    </select>
+
+    <update id="updateLocation">
+            UPDATE medical_centerinfo
+	        SET location_a=#{location_a}, location_b=#{location_b}
+	        WHERE orgnm=#{orgnm}
+    </update>
 </mapper>
