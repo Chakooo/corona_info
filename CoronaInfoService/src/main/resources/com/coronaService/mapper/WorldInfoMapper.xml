@@ -1,0 +1,89 @@
+<?xml version = "1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd.mybatis-3-mapper.dtd">
+<mapper namespace = "com.coronaService.mapper.WorldInfoMapper">
+    <insert id="insertCoronaWorldInfo">
+        INSERT INTO corona_world
+        (areaNm, createDt, natDeathCnt, natDeathRate, natDefCnt, nationNm, nationNmEn)
+        VALUES(#{areaNm}, #{createDt}, #{natDeathCnt}, #{natDeathRate}, #{natDefCnt}, #{nationNm}, #{nationNmEn});
+    </insert>
+
+    <select id="selectWorldCoronaSum" resultType="com.coronaService.vo.CoronaWorldInfoVO">
+        select sum(natDefCnt) as natDefCnt,sum(natDeathCnt)as natDeathCnt 
+        from corona_world cw 
+        where date_format(createDt , "%Y-%m-%d") = str_to_date(#{date}, "%Y-%m-%d");
+    </select>
+    
+    <select id="selectWorldCoronaSumYesterDay" resultType="com.coronaService.vo.CoronaWorldInfoVO">
+        select sum(natDefCnt) as natDefCnt,sum(natDeathCnt) as natDeathCnt
+        from corona_world 
+        where date_sub(date_format(createDt,"%Y-%m-%d"), interval -1 day) =  str_to_date(#{date}, "%Y-%m-%d");
+    </select>
+
+    <select id="selectDiffYesterday"  resultType= "java.lang.Integer">
+        select
+            (select sum(natDefCnt) as natDefCnt
+            from corona_world 
+            where date_sub(date_format(createDt,"%Y-%m-%d"), interval -1 day) =  str_to_date(#{date}, "%Y-%m-%d"))
+            -
+            (select sum(natDefCnt) as natDefCnt
+            from corona_world 
+            where date_sub(date_format(createDt,"%Y-%m-%d"), interval -2 day) =  str_to_date(#{date}, "%Y-%m-%d"))as diff
+            from corona_world cw limit 1
+    </select>
+     <select id="selectDiffWeeks"  resultType= "java.lang.Integer">
+          select
+            (select sum(natDefCnt) as natDefCnt
+            from corona_world 
+            where date_sub(date_format(createDt,"%Y-%m-%d"), interval -7 day) =  str_to_date(#{date}, "%Y-%m-%d"))
+            -
+            (select sum(natDefCnt) as natDefCnt
+            from corona_world 
+            where date_sub(date_format(createDt,"%Y-%m-%d"), interval -8 day) =  str_to_date(#{date}, "%Y-%m-%d"))as diff
+            from corona_world cw limit 1
+    </select>
+
+    <select id="selectChartInfo" resultType="com.coronaService.vo.CoronaWorldInfoVO">
+            select date_format(createDt,"%Y-%m-%d")as chartDate, sum(natDefCnt) as natDefCnt ,sum(natDeathCnt) as natDeathCnt
+                from corona_world 
+
+                    <if test="term.equals('month')">
+                        where
+                        date_format(createDt,"%Y-%m-%d")
+                        between
+                        date_sub(date_format(#{date},"%Y-%m-%d"),interval 1 month) and
+                        date_format(#{date}, "%Y-%m-%d")
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
+                    </if>
+                    
+                    <if test="term.equals('3month')">
+                        where
+                        date_format(createDt,"%Y-%m-%d")
+                        between
+                        date_sub(date_format(#{date},"%Y-%m-%d"),interval 3 month) and
+                        date_format(#{date}, "%Y-%m-%d")
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
+                    </if>
+                    <if test="term.equals('all')">
+                        group by date_format(createDt,"%Y-%m-%d") order by date_format(createDt,"%Y-%m-%d") asc;
+                    </if>
+    </select>
+    
+    <select id="selectNationalTodayInfo" resultType="com.coronaService.vo.CoronaWorldInfoVO">
+        select createDt,areaNm,nationNm,natDefCnt,natDeathCnt
+        from corona_world 
+        where date_format(createDt,"%Y-%m-%d")=  str_to_date(#{date}, "%Y-%m-%d")
+        and (areaNm != '기타' and areaNm != '오세아니아')
+        group by nationNm
+    </select>
+
+    <select id="selectNationalYesterdayInfo" resultType="com.coronaService.vo.CoronaWorldInfoVO">
+        select createDt,areaNm,nationNm,natDefCnt,natDeathCnt
+        from corona_world 
+        where date_sub(date_format(createDt,"%Y-%m-%d"), interval -1 day) =  str_to_date(#{date}, "%Y-%m-%d")
+        and (areaNm != '기타' and areaNm != '오세아니아')
+        group by nationNm 
+    </select>
+
+
+    
+</mapper>

@@ -47,7 +47,6 @@ $(function () {
                     backgroundColor: [
                         'blue'
                     ],
-                    borderColor: ['yellow']
                 },
                 {
                     label: '2 차 접종 현황',
@@ -55,7 +54,6 @@ $(function () {
                     backgroundColor: [
                         'red'
                     ],
-                    borderColor: ['yellow']
                 }
             ]
         }
@@ -63,7 +61,7 @@ $(function () {
 
     $("#date").datepicker(); // js 라이브러리 사용
     $("#date").datepicker("setDate", new Date());
-
+    let date = $("#date").val();
     $("#date").change(function () {
         // console.log($(this).val());
         let region = $("#region_select").find("option:selected").val();
@@ -79,8 +77,8 @@ $(function () {
         getCoronaVaccineInfo(region, date);
     });
 
-    getCoronaSidoInfo("서울")
-    getCoronaVaccineInfo("서울")
+    getCoronaSidoInfo("서울",date)
+    getCoronaVaccineInfo("서울",date)
 
 
     function getCoronaSidoInfo(sido, date) {
@@ -108,7 +106,6 @@ $(function () {
                         label: '코로나 누적 확진',
                         data: coronaWeeksData,
                         backgroundColor: ['red'],
-                        borderColor: ['yellow']
                     })
                     coronaWeeksChart.update();
                     // var coronaWeeksChart = new Chart($("#accDecideChart"), {
@@ -142,7 +139,6 @@ $(function () {
                         label: '1차 접종 현황',
                         data: vaccineWeeksAccFirst,
                         backgroundColor: ['blue'],
-                        borderColor: ['yellow']
                     },
                     {
                         label: '2 차 접종 현황',
@@ -150,7 +146,6 @@ $(function () {
                         backgroundColor: [
                             'red'
                         ],
-                        borderColor: ['yellow']
                     }
 
                     )

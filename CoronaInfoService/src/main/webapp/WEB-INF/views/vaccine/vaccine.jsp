@@ -23,7 +23,8 @@ pageEncoding="UTF-8"%>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"
         integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=554bca796911f82958fd7dd065bcee72&libraries=services"></script>
+    <script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=554bca796911f82958fd7dd065bcee72&libraries=services"></script>
 
     <script src="/assets/js/vaccine.js"></script>
 
@@ -50,23 +51,29 @@ pageEncoding="UTF-8"%>
             <div class="sido_area">
 
             </div>
-            <select id="region_select">
-                <option value="서울">서울특별시</option>
-                <option value="인천">인천광역시</option>
-                <option value="세종">세종특별자치시</option>
-                <option value="대전">대전광역시</option>
-                <option value="대구">대구광역시</option>
-                <option value="울산">울산광역시</option>
-                <option value="광주">광주광역시</option>
-                <option value="부산">부산광역시</option>
-                <option value="제주">제주특별자치도</option>                
-            </select>
-            <div class="data_row">
-              
-                <div id="vaccine_map" style="width:100%;height:350px;">               
-                   
 
+            <div class="region_wrap">
+                <select id="region_select">
+                    <option value="서울">서울특별시</option>
+                    <option value="인천">인천광역시</option>
+                    <option value="세종">세종특별자치시</option>
+                    <option value="대전">대전광역시</option>
+                    <option value="대구">대구광역시</option>
+                    <option value="울산">울산광역시</option>
+                    <option value="광주">광주광역시</option>
+                    <option value="부산">부산광역시</option>
+                    <option value="제주">제주특별자치도</option>
+                </select>               
+                    <span><img src="/assets/images/783204.png"> 예방 접종센터</span>
+                    <span><img src="/assets/images/rating.png"> 위탁 의료기관</span>           
+            </div>
+
+
+            <div class="data_row1">
+
+                <div id="vaccine_map" style="width:100%;height:500px;">
                 </div>
+
             </div>
         </div>
     </div>

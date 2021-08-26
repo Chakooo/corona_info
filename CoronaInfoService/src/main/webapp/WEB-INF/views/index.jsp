@@ -72,9 +72,9 @@ pageEncoding="UTF-8"%>
                         </thead>
                     </table>
                     <div class="region_pager_area">
-                        <button id ="region_prev">&lt;</button>
+                        <button id ="region_prev"><img src="/assets/images/back.png"  alt=""></button>
                         <span class="current">1</span> / <span class="total">6</span>
-                        <button id = "region_next">&gt;</button>
+                        <button id = "region_next"><img src="/assets/images/next.png"  alt=""></button>
                     </div>
                 </div>
             </div>

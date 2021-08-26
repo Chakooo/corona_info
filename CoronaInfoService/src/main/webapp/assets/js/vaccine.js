@@ -232,7 +232,7 @@ $(function () {
 
     $("#vaccine").addClass("currently");
 
-    $("#date").datepicker(); // js 라이브러리 사용
+    $("#date").datepicker(); // 라이브러리 사용
     $("#date").datepicker("setDate", new Date());
     $("#date").datepicker("option", "maxDate", new Date());
     $("#date").datepicker("option", "minDate", '2021-03-11');
@@ -241,6 +241,7 @@ $(function () {
 
 
     getVaccineInfo($("#date").val());
+    console.log($("#date").val())
 
     $("#date").change(function () {
         getVaccineInfo($("#date").val());
