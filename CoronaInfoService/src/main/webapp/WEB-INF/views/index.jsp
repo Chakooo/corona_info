@@ -4,9 +4,10 @@ pageEncoding="UTF-8"%>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>코로나 정보 대시보드</title>
+    <title>CORONA INFO</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.0/dist/chart.min.js"></script>
     <script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/free-icon-face-mask-3922438.png">
     <script src="/assets/js/index.js"></script>
 </head>
 <body>
@@ -40,25 +41,25 @@ pageEncoding="UTF-8"%>
                         <span class="num">2</span>명 추가확진
                     </div>
                     <div class="live_confirm_item">
-                        <span class = "time">16분 전</span>
-                        <span class="region">경남 고성군</span>
+                        <span class = "time">17분 전</span>
+                        <span class="region">대구 중구</span>
                         <span class="num">2</span>명 추가확진
                     </div>  <div class="live_confirm_item">
-                        <span class = "time">16분 전</span>
-                        <span class="region">경남 고성군</span>
-                        <span class="num">2</span>명 추가확진
+                        <span class = "time">18분 전</span>
+                        <span class="region">대구 북구</span>
+                        <span class="num">1</span>명 추가확진
                     </div>  <div class="live_confirm_item">
-                        <span class = "time">16분 전</span>
-                        <span class="region">경남 고성군</span>
-                        <span class="num">2</span>명 추가확진
+                        <span class = "time">25분 전</span>
+                        <span class="region">부산 서구</span>
+                        <span class="num">3</span>명 추가확진
                     </div>  <div class="live_confirm_item">
-                        <span class = "time">16분 전</span>
+                        <span class = "time">32분 전</span>
                         <span class="region">경남 고성군</span>
-                        <span class="num">2</span>명 추가확진
+                        <span class="num">1</span>명 추가확진
                     </div>  <div class="live_confirm_item">
-                        <span class = "time">16분 전</span>
-                        <span class="region">경남 고성군</span>
-                        <span class="num">2</span>명 추가확진
+                        <span class = "time">39분 전</span>
+                        <span class="region">서울 관악구</span>
+                        <span class="num">4</span>명 추가확진
                     </div>
                 </div>
                 <div class="content_right">

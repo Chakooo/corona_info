@@ -92,6 +92,7 @@ public class WorldAPIController {
     public Map<String,Object> getCoronaWorldInfo(@PathVariable String date){
         Map<String, Object> resultMap = new LinkedHashMap<String,Object>();
         CoronaWorldInfoVO vo= w_service.selectWorldCoronaSum(date);
+        System.out.println("월드 인");
         resultMap.put("data", vo);
         return resultMap;
     }

@@ -25,12 +25,12 @@ pageEncoding="UTF-8"%>
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=554bca796911f82958fd7dd065bcee72&libraries=services"></script>
-
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/images/free-icon-face-mask-3922438.png">
     <script src="/assets/js/vaccine.js"></script>
 
 
 
-    <title>Document</title>
+    <title>CORONA INFO</title>
 </head>
 
 <body>

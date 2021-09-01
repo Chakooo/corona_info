@@ -24,9 +24,9 @@ pageEncoding="UTF-8"%>
         integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/assets/js/world.js"></script>
-
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/free-icon-face-mask-3922438.png">
     <link rel="stylesheet" href="/assets/css/world.css">
-    <title>Document</title>
+    <title>CORONA INFO</title>
 </head>
 <div class="container">
     <%@include file="/WEB-INF/views/includes/menu.jsp"%>
